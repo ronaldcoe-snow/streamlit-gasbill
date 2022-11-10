@@ -33,7 +33,7 @@ my_cnx.close()
 
 
 
-df_transactions = pd.DataFrame(back_from_transactions, columns=['transactionDate', 'transactionDescription', 'transactionYear', 'transactionMonth'])
+df_transactions = pd.DataFrame(back_from_transactions, columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')
 streamlit.table(df_transactions)
 
@@ -48,7 +48,7 @@ streamlit.write(filt_m)
 filt_y = (df_transactions['transactionYear'].isin(df_y_rep['transactionYear'].values.tolist()))
 streamlit.write(filt_y)
 
-df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['transactionDate', 'transactionDescription', 'transactionYear', 'transactionMonth'])
+df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 
 streamlit.table(df_months_represented.drop_duplicates(subset='transactionMonth'))
 

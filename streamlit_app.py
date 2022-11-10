@@ -80,6 +80,8 @@ streamlit.write(t_sel)
 
 streamlit.write(len(t_sel))
 
+f_date_str = "YYYY-MM-DD"
+df_transactions['cv_transactionDate'] = df_transactions['transactionDate'].astype(f_date_str)
 if len(t_sel) == 2:
   c1, c2 = streamlit.columns(2)
 

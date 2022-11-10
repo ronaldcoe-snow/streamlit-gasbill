@@ -28,13 +28,13 @@ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 
 # streamlit.table(df)
 
-# back_from_transactions = get_demo_transaction_list()
-# my_cnx.close()
+back_from_transactions = get_demo_transaction_list()
+my_cnx.close()
 
 
 
-# df_transactions = pd.DataFrame(back_from_transactions, columns=['transactionDate', 'transactionDescription', 'transactionYear', 'transactionMonth'])
-# df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')
+df_transactions = pd.DataFrame(back_from_transactions, columns=['transactionDate', 'transactionDescription', 'transactionYear', 'transactionMonth'])
+df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')
 streamlit.table(df_transactions)
 
 

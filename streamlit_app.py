@@ -1,6 +1,8 @@
 import streamlit
 import pandas as pd
 import snowflake.connector
+
+pd.option_context('display.float_format', '{:0.20f}'.format)
   
 def get_demo_table_list():
   with my_cnx.cursor() as my_cur:

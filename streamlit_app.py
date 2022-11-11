@@ -101,9 +101,12 @@ if len(t_sel) == 2:
     df_transactions_f2 = df_transactions[filt_c2].sort_values(by='transactionDate', ascending=False)
     streamlit.table(df_transactions_f2[['cv_transactionDate', 'transactionAmount']])
     df_transactions_f2.rename(columns={'transactionAmount': 'transactionAmount_2'}, inplace=True)
-  
+ 
+  t_year1 = 'Year_' + str(t_sel[0])
+  t_year2 = 'Year_' + str(t_sel[1])
+ 
   df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="inner", on='transactionMonth')
-  df_combined_trans.rename(columns={'transactionAmount_1': 'Year_' + str(t_sel[0]), 'transactionAmount_2': 'Year_' + str[1], inplace=True})
+  df_combined_trans.rename(columns={'transactionAmount_1': t_year1, 'transactionAmount_2': t_year2, inplace=True})
   # df_combined_trans = pd.DataFrame()
   # df_combined_trans['transactionMonth'] = df_transactions_f1['transactionMonth']
   # df_combined_trans['transactionMonth'] = df_transactions_f2['transactionMonth']

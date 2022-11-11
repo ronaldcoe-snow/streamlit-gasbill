@@ -65,9 +65,9 @@ t_years = df_sl_years_0['transactionYear'].values.tolist()
 
 # streamlit.write(t_years)
 
-my_option = streamlit.selectbox("The Year: ", df_sl_years)
+# my_option = streamlit.selectbox("The Year: ", df_sl_years)
 
-filt_one = (df_transactions['transactionYear'] == my_option)
+# filt_one = (df_transactions['transactionYear'] == my_option)
 # streamlit.table(df_transactions[filt_one])
 
 # streamlit.write(t_years)

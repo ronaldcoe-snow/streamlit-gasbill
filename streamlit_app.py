@@ -94,18 +94,20 @@ if len(t_sel) == 2:
     filt_c1 = (df_transactions['transactionYear'] == t_sel[0])
     df_transactions_f1 = df_transactions[filt_c1].sort_values(by='transactionDate', ascending=False)
     streamlit.table(df_transactions_f1[['cv_transactionDate', 'transactionAmount']])
+    df_transactions_f1.rename(columns={'transactionAmount': 'transactionAmount_1'})
 
   with c2:
     filt_c2 = (df_transactions['transactionYear'] == t_sel[1])
     df_transactions_f2 = df_transactions[filt_c2].sort_values(by='transactionDate', ascending=False)
     streamlit.table(df_transactions_f2[['cv_transactionDate', 'transactionAmount']])
+    df_transactions_f2.rename(columns={'transactionAmount': 'transactionAmount_2'})
   
-  # df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="outer")
-  df_combined_trans = pd.DataFrame()
-  df_combined_trans['transactionMonth'] = df_transactions_f1['transactionMonth']
-  df_combined_trans['transactionMonth'] = df_transactions_f2['transactionMonth']
-  df_combined_trans['transactionAmount_1'] = df_transactions_f1['transactionAmount']
-  df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
+  df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="outer")
+  # df_combined_trans = pd.DataFrame()
+  # df_combined_trans['transactionMonth'] = df_transactions_f1['transactionMonth']
+  # df_combined_trans['transactionMonth'] = df_transactions_f2['transactionMonth']
+  # df_combined_trans['transactionAmount_1'] = df_transactions_f1['transactionAmount']
+  # df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
   streamlit.table(df_combined_trans[['transactionMonth', 'transactionAmount_1', 'transactionAmount_2']])
 
   streamlit.area_chart(df_combined_trans, x= 'transactionMonth', y = ['transactionAmount_1', 'transactionAmount_2'])

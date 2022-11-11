@@ -103,11 +103,13 @@ if len(t_sel) == 2:
     df_transactions_f2.rename(columns={'transactionAmount': 'transactionAmount_2'}, inplace=True)
   
   df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="inner", on='transactionMonth')
+  df_combined_trans.rename(columns={'transactionAmount_1': 'Year_' + str(t_sel[0])})
+  df_combined_trans.rename(columns={'transactionAmount_2': 'Year_' + str(t_sel[1])})
   # df_combined_trans = pd.DataFrame()
   # df_combined_trans['transactionMonth'] = df_transactions_f1['transactionMonth']
   # df_combined_trans['transactionMonth'] = df_transactions_f2['transactionMonth']
   # df_combined_trans['transactionAmount_1'] = df_transactions_f1['transactionAmount']
   # df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
-  streamlit.table(df_combined_trans[['transactionMonth', 'transactionAmount_1', 'transactionAmount_2']])
+  streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
   streamlit.area_chart(df_combined_trans, x= 'transactionMonth', y = ['transactionAmount_1', 'transactionAmount_2'])

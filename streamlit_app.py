@@ -114,4 +114,4 @@ if len(t_sel) == 2:
   # df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
   streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
-  streamlit.area_chart(df_combined_trans, x= 'transactionMonth', y = ['transactionAmount_1', 'transactionAmount_2'])
+  streamlit.area_chart(df_combined_trans, x= 'transactionMonth', y = [t_year1, t_year2])

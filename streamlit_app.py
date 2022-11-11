@@ -101,4 +101,4 @@ if len(t_sel) == 2:
     streamlit.table(df_transactions_f2[['cv_transactionDate', 'transactionAmount']])
   
   df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="outer")
-  streamlit.table(df_combined_trans)
+  streamlit.table(df_combined_trans[['cv_transactionDate', 'transactionAmount']])

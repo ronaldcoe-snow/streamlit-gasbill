@@ -106,7 +106,7 @@ if len(t_sel) == 2:
   t_year2 = 'Year_' + str(t_sel[1])
  
   df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="inner", on='transactionMonth')
-  df_combined_trans.rename(columns={'transactionAmount_1': t_year1, 'transactionAmount_2': t_year2, inplace=True})
+  df_combined_trans.rename(columns={'transactionAmount_1': t_year1, 'transactionAmount_2': t_year2}, inplace=True)
   # df_combined_trans = pd.DataFrame()
   # df_combined_trans['transactionMonth'] = df_transactions_f1['transactionMonth']
   # df_combined_trans['transactionMonth'] = df_transactions_f2['transactionMonth']

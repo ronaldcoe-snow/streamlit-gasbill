@@ -2,7 +2,7 @@ import streamlit
 import pandas as pd
 import snowflake.connector
 
-# pd.option_context('display.float_format', '{:0.2f}'.format)
+pd.option_context('display.float_format', '{:0.2f}'.format)
   
 def get_demo_table_list():
   with my_cnx.cursor() as my_cur:
@@ -100,5 +100,5 @@ if len(t_sel) == 2:
     df_transactions_f2 = df_transactions[filt_c2].sort_values(by='transactionDate', ascending=False)
     streamlit.table(df_transactions_f2[['cv_transactionDate', 'transactionAmount']])
   
-  # df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="outer")
-  # streamlit.table(df_combined_trans)
+  df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="outer")
+  streamlit.table(df_combined_trans)

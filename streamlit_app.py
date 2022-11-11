@@ -50,9 +50,9 @@ filt_y = (df_transactions['transactionYear'].isin(df_y_rep['transactionYear'].va
 
 df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 
-streamlit.table(df_months_represented.drop_duplicates(subset='transactionMonth'))
+# streamlit.table(df_months_represented.drop_duplicates(subset='transactionMonth'))
 
-streamlit.table(df_months_represented.drop_duplicates(subset='transactionYear'))
+# streamlit.table(df_months_represented.drop_duplicates(subset='transactionYear'))
 
 df_sl_years = df_months_represented['transactionYear'].drop_duplicates()
 df_sl_years_0 = df_sl_years.to_frame().reset_index()
@@ -74,13 +74,13 @@ filt_one = (df_transactions['transactionYear'] == my_option)
 
 # streamlit.write(t_years)
 
+streamlit.write("Compare expenses associated between two years of natural gas bills:")
 t_sel = streamlit.multiselect("What Years to compare?", df_sl_years, max_selections=2)
 
 # streamlit.write(t_sel)
 
 # streamlit.write(len(t_sel))
 
-streamlit.write("Compare expenses associated between two years of natural gas bills:")
 f_date_str = "%Y-%m-%d"
 df_transactions['cv_transactionDate'] = df_transactions['transactionDate'].dt.strftime(f_date_str)
 if len(t_sel) == 2:

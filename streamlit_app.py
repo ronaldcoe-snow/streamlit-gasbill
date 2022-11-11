@@ -102,3 +102,5 @@ if len(t_sel) == 2:
   
   df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="outer")
   streamlit.table(df_combined_trans[['cv_transactionDate', 'transactionAmount', 'transactionMonth']])
+
+  streamlit.area_chart(df_combined_trans, x= 'transactionMonth', y = 'transactionAmount')

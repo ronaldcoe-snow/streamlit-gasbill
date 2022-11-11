@@ -99,3 +99,6 @@ if len(t_sel) == 2:
     filt_c2 = (df_transactions['transactionYear'] == t_sel[1])
     df_transactions_f2 = df_transactions[filt_c2].sort_values(by='transactionDate', ascending=False)
     streamlit.table(df_transactions_f2[['cv_transactionDate', 'transactionAmount']])
+  
+  df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="outer")
+  streamlit.table(df_combined_trans)

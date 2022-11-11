@@ -113,6 +113,6 @@ if len(t_sel) == 2:
   # df_combined_trans['transactionAmount_1'] = df_transactions_f1['transactionAmount']
   # df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
   streamlit.title("Merged DataFrame of the selected years:")
-  streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
+  streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
 
   streamlit.area_chart(df_combined_trans, x= 'transactionMonth', y = [t_year1, t_year2])

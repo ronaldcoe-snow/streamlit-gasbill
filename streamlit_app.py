@@ -51,7 +51,8 @@ my_session = create_sp_session()
 # streamlit.table(df)
 
 back_from_transactions = get_demo_transaction_list_sp(my_session)
-my_cnx.close()
+# my_cnx.close()
+my_session.close()
 
 
 

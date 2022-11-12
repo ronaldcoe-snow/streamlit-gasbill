@@ -29,7 +29,7 @@ def get_demo_transaction_list():
       return my_cur_transactions.fetchall()
 
 def get_demo_transaction_list_sp(the_session):
-  the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM tbl_gasbill").collect()
+  the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM demo_schema.tbl_gasbill").collect()
   return the_session
 
 def get_demo_transaction_list_w_param_year(the_year):

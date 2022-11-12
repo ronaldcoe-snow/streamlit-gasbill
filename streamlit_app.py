@@ -30,8 +30,9 @@ def get_demo_transaction_list():
 
 def get_demo_transaction_list_sp(the_session):
   m_df = the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM demo_db.demo_schema.tbl_gasbill")
-  streamlit.table(m_df)
-  return m_df
+  t_df = m_df.to_pandas()
+  streamlit.table(t_df)
+  return t_df
 
 def get_demo_transaction_list_w_param_year(the_year):
   with my_cnx.cursor() as my_cur_transactions:
@@ -56,7 +57,7 @@ back_from_transactions = get_demo_transaction_list_sp(my_session)
 
 
 
-df_transactions = pd.DataFrame(back_from_transactions.to_pandas(), columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
+df_transactions = pd.DataFrame(back_from_transactions, columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 streamlit.table(df_transactions)
 df_transactions['transactionDate'] = pd.to_datetime(df_transactions['transactionDate'])
 # df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')

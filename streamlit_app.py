@@ -1,7 +1,6 @@
 import streamlit
 import pandas as pd
 import snowflake.connector
-import snowflake-snowpark-python
 from snowflake.snowpark.session import Session
 
 pd.option_context('display.float_format', '{:0.2f}'.format)

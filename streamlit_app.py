@@ -51,13 +51,13 @@ my_session = create_sp_session()
 
 back_from_transactions = get_demo_transaction_list_sp(my_session)
 # my_cnx.close()
-my_session.close()
 
 
 
 df_transactions = pd.DataFrame(back_from_transactions.to_pandas(), columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')
 # streamlit.table(df_transactions)
+my_session.close()
 
 
 df_m_rep = pd.DataFrame(df_transactions['transactionMonth'].unique().tolist(), columns = ['transactionMonth'])

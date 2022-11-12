@@ -6,7 +6,16 @@ from snowflake.snowpark.session import Session
 pd.option_context('display.float_format', '{:0.2f}'.format)
   
 def create_sp_session():
-  session = Session.builder.configs(**streamlit.secrets["snowflake"]).create()
+  conn_param = {
+    "account": **streamlit.secrets["snowflake"].account,
+    "user": **streamlit.secrets["snowflake"].user,
+    "databasae": **streamlit.secrets["snowflake"].database,
+    "role": **streamlit.secrets["role"].role,
+    "warehouse": **streamlit.secrets["warehouse"].warehouse,
+    "schema": **streamlit.secrets["schema"].schema,
+    "password": **streamlit.secrets["password"].password
+  }
+  session = Session.builder.configs(conn_param).create()
   return session
 
 def get_demo_table_list():

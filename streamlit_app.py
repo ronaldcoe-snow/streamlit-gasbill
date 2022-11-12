@@ -29,7 +29,8 @@ def get_demo_transaction_list():
       return my_cur_transactions.fetchall()
 
 def get_demo_transaction_list_sp(the_session):
-  return the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM demo_db.demo_schema.tbl_gasbill")
+  m_df = the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM demo_db.demo_schema.tbl_gasbill")
+  return m_df
 
 def get_demo_transaction_list_w_param_year(the_year):
   with my_cnx.cursor() as my_cur_transactions:

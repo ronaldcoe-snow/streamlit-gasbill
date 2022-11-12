@@ -66,16 +66,16 @@ df_m_rep = pd.DataFrame(df_transactions['transactionMonth'].unique().tolist(), c
 df_y_rep = pd.DataFrame(df_transactions['transactionYear'].unique().tolist(), columns = ['transactionYear'])
 
 filt_m = (df_transactions['transactionMonth'].isin(df_m_rep['transactionMonth'].values.tolist()))
-# streamlit.write(filt_m)
+streamlit.write(filt_m)
 
 filt_y = (df_transactions['transactionYear'].isin(df_y_rep['transactionYear'].values.tolist()))
-# streamlit.write(filt_y)
+streamlit.write(filt_y)
 
 df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 
-# streamlit.table(df_months_represented.drop_duplicates(subset='transactionMonth'))
+streamlit.table(df_months_represented.drop_duplicates(subset='transactionMonth'))
 
-# streamlit.table(df_months_represented.drop_duplicates(subset='transactionYear'))
+streamlit.table(df_months_represented.drop_duplicates(subset='transactionYear'))
 
 df_sl_years = df_months_represented['transactionYear'].drop_duplicates()
 df_sl_years_0 = df_sl_years.to_frame().reset_index()

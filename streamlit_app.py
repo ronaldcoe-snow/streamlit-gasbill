@@ -31,7 +31,7 @@ def get_demo_transaction_list():
 def get_demo_transaction_list_sp(the_session, t_df):
   m_df = the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM demo_db.demo_schema.tbl_gasbill")
   t_df = m_df.to_pandas()
-  streamlit.table(t_df)
+  # streamlit.table(t_df)
   return t_df.copy()
 
 def get_demo_transaction_list_w_param_year(the_year):
@@ -57,44 +57,44 @@ back_from_transactions = get_demo_transaction_list_sp(my_session, r_df)
 
 
 
-df_transactions = pd.DataFrame(back_from_transactions, columns=['TRANSACTIONDATE', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
+df_transactions = pd.DataFrame(back_from_transactions, columns=['TRANSACTIONDATE', 'TRANSACTIONAMOUNT', 'TRANSACTIONSTATUS', 'TRANSACTIONYEAR', 'TRANSACTIONMONTH'])
 streamlit.table(df_transactions)
-df_transactions['transactionDate'] = pd.to_datetime(df_transactions['transactionDate'])
-# df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')
+df_transactions['TRANSACTIONDATE'] = pd.to_datetime(df_transactions['TRANSACTIONDATE'])
+df_transactions['year'] = df_transactions['TRANSACTIONDATE'].dt.to_period('M')
 # streamlit.table(df_transactions)
 my_session.close()
 
 
-df_m_rep = pd.DataFrame(df_transactions['transactionMonth'].unique().tolist(), columns = ['transactionMonth'])
+df_m_rep = pd.DataFrame(df_transactions['TRANSACTIONMONTH'].unique().tolist(), columns = ['TRANSACTIONMONTH'])
 
-df_y_rep = pd.DataFrame(df_transactions['transactionYear'].unique().tolist(), columns = ['transactionYear'])
+df_y_rep = pd.DataFrame(df_transactions['TRANSACTIONYEAR'].unique().tolist(), columns = ['TRANSACTIONYEAR'])
 
-filt_m = (df_transactions['transactionMonth'].isin(df_m_rep['transactionMonth'].values.tolist()))
+filt_m = (df_transactions['TRANSACTIONMONTH'].isin(df_m_rep['TRANSACTIONMONTH'].values.tolist()))
 streamlit.write(filt_m)
 
-filt_y = (df_transactions['transactionYear'].isin(df_y_rep['transactionYear'].values.tolist()))
+filt_y = (df_transactions['TRANSACTIONYEAR'].isin(df_y_rep['TRANSACTIONYEAR'].values.tolist()))
 streamlit.write(filt_y)
 
-df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
+df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['TRANSACTIONDATE', 'TRANSACTIONAMOUNT', 'TRANSACTIONSTATUS', 'TRANSACTIONYEAR', 'TRANSACTIONMONTH'])
 
-streamlit.table(df_months_represented.drop_duplicates(subset='transactionMonth'))
+streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONMONTH'))
 
-streamlit.table(df_months_represented.drop_duplicates(subset='transactionYear'))
+streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONYEAR'))
 
-df_sl_years = df_months_represented['transactionYear'].drop_duplicates()
+df_sl_years = df_months_represented['TRANSACTIONYEAR'].drop_duplicates()
 df_sl_years_0 = df_sl_years.to_frame().reset_index()
-df_sl_years_0 = df_sl_years_0.rename(columns={0: 'transactionYear'})
-# df_sl_years_0.set_index(['transactionYear'], inplace=True)
+df_sl_years_0 = df_sl_years_0.rename(columns={0: 'TRANSACTIONYEAR'})
+# df_sl_years_0.set_index(['TRANSACTIONYEAR'], inplace=True)
 
 # streamlit.table(df_sl_years_0)
 
-t_years = df_sl_years_0['transactionYear'].values.tolist()
+t_years = df_sl_years_0['TRANSACTIONYEAR'].values.tolist()
 
 # streamlit.write(t_years)
 
 # my_option = streamlit.selectbox("The Year: ", df_sl_years)
 
-# filt_one = (df_transactions['transactionYear'] == my_option)
+# filt_one = (df_transactions['TRANSACTIONYEAR'] == my_option)
 # streamlit.table(df_transactions[filt_one])
 
 # streamlit.write(t_years)
@@ -109,37 +109,37 @@ t_sel = streamlit.multiselect("What Years to compare?", df_sl_years, max_selecti
 # streamlit.write(len(t_sel))
 
 f_date_str = "%Y-%m-%d"
-df_transactions['cv_transactionDate'] = df_transactions['transactionDate'].dt.strftime(f_date_str)
+df_transactions['cv_TRANSACTIONDATE'] = df_transactions['TRANSACTIONDATE'].dt.strftime(f_date_str)
 if len(t_sel) == 2:
   c1, c2 = streamlit.columns(2)
 
   c1.subheader("Year One: " + str(t_sel[0]))
   c2.subheader("Year Two: " + str(t_sel[1]))
   with c1:
-    filt_c1 = (df_transactions['transactionYear'] == t_sel[0])
-    df_transactions_f1 = df_transactions[filt_c1].sort_values(by='transactionDate', ascending=False)
-    streamlit.table(df_transactions_f1[['cv_transactionDate', 'transactionAmount']])
-    df_transactions_f1.rename(columns={'transactionAmount': 'transactionAmount_1'}, inplace=True)
+    filt_c1 = (df_transactions['TRANSACTIONYEAR'] == t_sel[0])
+    df_transactions_f1 = df_transactions[filt_c1].sort_values(by='TRANSACTIONDATE', ascending=False)
+    streamlit.table(df_transactions_f1[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
+    df_transactions_f1.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_1'}, inplace=True)
 
   with c2:
-    filt_c2 = (df_transactions['transactionYear'] == t_sel[1])
-    df_transactions_f2 = df_transactions[filt_c2].sort_values(by='transactionDate', ascending=False)
-    streamlit.table(df_transactions_f2[['cv_transactionDate', 'transactionAmount']])
-    df_transactions_f2.rename(columns={'transactionAmount': 'transactionAmount_2'}, inplace=True)
+    filt_c2 = (df_transactions['TRANSACTIONYEAR'] == t_sel[1])
+    df_transactions_f2 = df_transactions[filt_c2].sort_values(by='TRANSACTIONDATE', ascending=False)
+    streamlit.table(df_transactions_f2[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
+    df_transactions_f2.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_2'}, inplace=True)
  
   t_year1 = 'Year_' + str(t_sel[0])
   t_year2 = 'Year_' + str(t_sel[1])
  
-  df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="inner", on='transactionMonth')
+  df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="inner", on='TRANSACTIONMONTH')
   df_combined_trans.rename(columns={'transactionAmount_1': t_year1, 'transactionAmount_2': t_year2}, inplace=True)
   # df_combined_trans = pd.DataFrame()
-  # df_combined_trans['transactionMonth'] = df_transactions_f1['transactionMonth']
-  # df_combined_trans['transactionMonth'] = df_transactions_f2['transactionMonth']
+  # df_combined_trans['TRANSACTIONMONTH'] = df_transactions_f1['TRANSACTIONMONTH']
+  # df_combined_trans['TRANSACTIONMONTH'] = df_transactions_f2['TRANSACTIONMONTH']
   # df_combined_trans['transactionAmount_1'] = df_transactions_f1['transactionAmount']
   # df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
   streamlit.title("Merged DataFrame of the selected years:")
-  # streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
-  streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
+  # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
+  streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
-  streamlit.line_chart(df_combined_trans, x= 'transactionMonth', y = [t_year1, t_year2])
-  streamlit.write(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
+  streamlit.line_chart(df_combined_trans, x= 'TRANSACTIONMONTH', y = [t_year1, t_year2])
+  streamlit.write(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))

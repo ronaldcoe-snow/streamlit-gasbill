@@ -1,9 +1,15 @@
 import streamlit
 import pandas as pd
 import snowflake.connector
+import snowflake-snowpark-python
+from snowflake.snowpark.session import Session
 
 pd.option_context('display.float_format', '{:0.2f}'.format)
   
+def create_sp_session():
+  session = Session.builder.configs(**streamlit.secrets["snowflake"]).create()
+  return session
+
 def get_demo_table_list():
   with my_cnx.cursor() as my_cur:
       my_cur.execute("SELECT * FROM DEMO_TABLE")
@@ -14,13 +20,19 @@ def get_demo_transaction_list():
       my_cur_transactions.execute("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM tbl_gasbill")
       return my_cur_transactions.fetchall()
 
+def get_demo_transaction_list_sp(the_session):
+  the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM tbl_gasbill")
+  return the_session.collect()
+
 def get_demo_transaction_list_w_param_year(the_year):
   with my_cnx.cursor() as my_cur_transactions:
       my_cur_transactions.execute("SELECT *, YEAR(t_date) as transactionYear, MONTH(transactionDate) as transactionMonth FROM tbl_gasbill")
       return my_cur_transactions.fetchall()
 
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+# my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_session = create_sp_session()
+
 # back_from_function = get_demo_table_list()
 # my_cnx.close()
 
@@ -30,12 +42,12 @@ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 
 # streamlit.table(df)
 
-back_from_transactions = get_demo_transaction_list()
+back_from_transactions = get_demo_transaction_list_sp(my_session)
 my_cnx.close()
 
 
 
-df_transactions = pd.DataFrame(back_from_transactions, columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
+df_transactions = pd.DataFrame(back_from_transactions.to_pandas(), columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')
 # streamlit.table(df_transactions)
 

@@ -10,10 +10,10 @@ def create_sp_session():
     "account": streamlit.secrets["snowflake"].account,
     "user": streamlit.secrets["snowflake"].user,
     "databasae": streamlit.secrets["snowflake"].database,
-    "role": streamlit.secrets["role"].role,
-    "warehouse": streamlit.secrets["warehouse"].warehouse,
-    "schema": streamlit.secrets["schema"].schema,
-    "password": streamlit.secrets["password"].password
+    "role": streamlit.secrets["snowflake"].role,
+    "warehouse": streamlit.secrets["snowflake"].warehouse,
+    "schema": streamlit.secrets["snowflake"].schema,
+    "password": streamlit.secrets["snowflake"].password
   }
   session = Session.builder.configs(conn_param).create()
   return session

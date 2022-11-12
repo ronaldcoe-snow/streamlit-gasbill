@@ -70,10 +70,10 @@ df_m_rep = pd.DataFrame(df_transactions['TRANSACTIONMONTH'].unique().tolist(), c
 df_y_rep = pd.DataFrame(df_transactions['TRANSACTIONYEAR'].unique().tolist(), columns = ['TRANSACTIONYEAR'])
 
 filt_m = (df_transactions['TRANSACTIONMONTH'].isin(df_m_rep['TRANSACTIONMONTH'].values.tolist()))
-streamlit.write(filt_m)
+# streamlit.write(filt_m)
 
 filt_y = (df_transactions['TRANSACTIONYEAR'].isin(df_y_rep['TRANSACTIONYEAR'].values.tolist()))
-streamlit.write(filt_y)
+# streamlit.write(filt_y)
 
 df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['TRANSACTIONDATE', 'TRANSACTIONAMOUNT', 'TRANSACTIONSTATUS', 'TRANSACTIONYEAR', 'TRANSACTIONMONTH'])
 

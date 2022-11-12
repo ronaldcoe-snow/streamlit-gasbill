@@ -116,5 +116,5 @@ if len(t_sel) == 2:
   # streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
   streamlit.table(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
-  streamlit.area_chart(df_combined_trans, x= 'transactionMonth', y = [t_year1, t_year2])
+  streamlit.line_chart(df_combined_trans, x= 'transactionMonth', y = [t_year1, t_year2])
   streamlit.write(df_combined_trans[['transactionMonth', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))

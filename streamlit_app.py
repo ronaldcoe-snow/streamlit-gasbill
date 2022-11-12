@@ -58,7 +58,7 @@ back_from_transactions = get_demo_transaction_list_sp(my_session, r_df)
 
 
 df_transactions = pd.DataFrame(back_from_transactions, columns=['TRANSACTIONDATE', 'TRANSACTIONAMOUNT', 'TRANSACTIONSTATUS', 'TRANSACTIONYEAR', 'TRANSACTIONMONTH'])
-streamlit.table(df_transactions)
+# streamlit.table(df_transactions)
 df_transactions['TRANSACTIONDATE'] = pd.to_datetime(df_transactions['TRANSACTIONDATE'])
 df_transactions['year'] = df_transactions['TRANSACTIONDATE'].dt.to_period('M')
 # streamlit.table(df_transactions)
@@ -77,9 +77,9 @@ streamlit.write(filt_y)
 
 df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['TRANSACTIONDATE', 'TRANSACTIONAMOUNT', 'TRANSACTIONSTATUS', 'TRANSACTIONYEAR', 'TRANSACTIONMONTH'])
 
-streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONMONTH'))
+# streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONMONTH'))
 
-streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONYEAR'))
+# streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONYEAR'))
 
 df_sl_years = df_months_represented['TRANSACTIONYEAR'].drop_duplicates()
 df_sl_years_0 = df_sl_years.to_frame().reset_index()

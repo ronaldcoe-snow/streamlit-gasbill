@@ -57,7 +57,7 @@ back_from_transactions = get_demo_transaction_list_sp(my_session, r_df)
 
 
 
-df_transactions = pd.DataFrame(back_from_transactions, columns=['transactionDate', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
+df_transactions = pd.DataFrame(back_from_transactions, columns=['TRANSACTIONDATE', 'transactionAmount', 'transactionStatus', 'transactionYear', 'transactionMonth'])
 streamlit.table(df_transactions)
 df_transactions['transactionDate'] = pd.to_datetime(df_transactions['transactionDate'])
 # df_transactions['year'] = df_transactions['transactionDate'].dt.to_period('M')

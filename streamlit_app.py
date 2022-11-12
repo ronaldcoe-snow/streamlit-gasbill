@@ -28,7 +28,7 @@ def get_demo_transaction_list():
       my_cur_transactions.execute("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM tbl_gasbill")
       return my_cur_transactions.fetchall()
 
-def get_demo_transaction_list_sp(the_session):
+def get_demo_transaction_list_sp(the_session, t_df):
   m_df = the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM demo_db.demo_schema.tbl_gasbill")
   t_df = m_df.to_pandas()
   streamlit.table(t_df)
@@ -52,7 +52,7 @@ my_session = create_sp_session()
 
 # streamlit.table(df)
 
-back_from_transactions = get_demo_transaction_list_sp(my_session)
+back_from_transactions = get_demo_transaction_list_sp(my_session, r_df)
 # my_cnx.close()
 
 

@@ -30,6 +30,7 @@ def get_demo_transaction_list():
 
 def get_demo_transaction_list_sp(the_session):
   m_df = the_session.sql("SELECT *, YEAR(transactionDate) as transactionYear, MONTH(transactionDate) as transactionMonth FROM demo_db.demo_schema.tbl_gasbill")
+  streamlit.table(m_df)
   return m_df
 
 def get_demo_transaction_list_w_param_year(the_year):

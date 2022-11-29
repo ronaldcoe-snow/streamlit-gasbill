@@ -9,7 +9,7 @@ def create_sp_session():
   conn_param = {
     "account": streamlit.secrets["snowflake"].account,
     "user": streamlit.secrets["snowflake"].user,
-    "databasae": streamlit.secrets["snowflake"].database,
+    "database": streamlit.secrets["snowflake"].database,
     "role": streamlit.secrets["snowflake"].role,
     "warehouse": streamlit.secrets["snowflake"].warehouse,
     "schema": streamlit.secrets["snowflake"].schema,

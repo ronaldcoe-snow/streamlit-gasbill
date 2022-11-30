@@ -102,6 +102,8 @@ t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']]
 
 # streamlit.write(t_years)
 
+sel_year = int(df_sl_years['TRANSACTIONYEAR'].min())
+
 streamlit.slider("Select a year", min_value = int(df_sl_years['TRANSACTIONYEAR'].min()), max_value = int(df_sl_years['TRANSACTIONYEAR'].max()), value = int(df_sl_years['TRANSACTIONYEAR'].min()))
 # df_sl_years
 streamlit.title("Compare expenses associated between two years of natural gas bills:")
@@ -144,5 +146,5 @@ if len(t_sel) == 2:
   # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
   streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
-  streamlit.line_chart(df_combined_trans, x= 'TRANSACTIONMONTH', y = 'TRANSACTIONYEAR')
+  streamlit.line_chart(df_combined_trans, x= 'TRANSACTIONMONTH', y = sel_year)
   streamlit.write(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))

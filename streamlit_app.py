@@ -102,9 +102,9 @@ t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']]
 
 # streamlit.write(t_years)
 
-sel_year = [int(df_sl_years['TRANSACTIONYEAR'].min())]
+# sel_year = [int(df_sl_years['TRANSACTIONYEAR'].min())]
 
-streamlit.slider("Select a year", min_value = int(df_sl_years['TRANSACTIONYEAR'].min()), max_value = int(df_sl_years['TRANSACTIONYEAR'].max()), value = int(df_sl_years['TRANSACTIONYEAR'].min()))
+sel_year = streamlit.slider("Select a year", min_value = int(df_sl_years['TRANSACTIONYEAR'].min()), max_value = int(df_sl_years['TRANSACTIONYEAR'].max()), value = int(df_sl_years['TRANSACTIONYEAR'].min()))
 # df_sl_years
 streamlit.title("Compare expenses associated between two years of natural gas bills:")
 t_sel = streamlit.multiselect("What Years to compare?", df_sl_years['TRANSACTIONYEAR'], max_selections=2)
@@ -112,6 +112,8 @@ t_sel = streamlit.multiselect("What Years to compare?", df_sl_years['TRANSACTION
 # streamlit.write(t_sel)
 
 # streamlit.write(len(t_sel))
+
+filt_slider = ((df_transactions['TRANSACTIONYEAR'] >= int(df_sl_years['TRANSACTIONYEAR'].min()) & (df_transactions['TRANSACTIONYEAR'] <= sel_year)))
 
 f_date_str = "%Y-%m-%d"
 df_transactions['cv_TRANSACTIONDATE'] = df_transactions['TRANSACTIONDATE'].dt.strftime(f_date_str)
@@ -146,5 +148,5 @@ if len(t_sel) == 2:
   # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
   # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
-  streamlit.line_chart(df_months_represented, x= 'TRANSACTIONMONTH', y = 'TRANSACTIONYEAR')
+  streamlit.line_chart(df_months_represented[filt_slider], x= 'TRANSACTIONMONTH', y = 'TRANSACTIONYEAR')
   # streamlit.write(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))

@@ -118,35 +118,6 @@ filt_slider = ((df_transactions['TRANSACTIONYEAR'] >= int(df_sl_years['TRANSACTI
 f_date_str = "%Y-%m-%d"
 df_transactions['cv_TRANSACTIONDATE'] = df_transactions['TRANSACTIONDATE'].dt.strftime(f_date_str)
 if sel_year > 0:
-  c1, c2 = streamlit.columns(2)
-
-  # c1.subheader("Year One: " + str(t_sel[0]))
-  # c2.subheader("Year Two: " + str(t_sel[1]))
-  with c1:
-    # filt_c1 = (df_transactions['TRANSACTIONYEAR'] == t_sel[0])
-    # df_transactions_f1 = df_transactions[filt_c1].sort_values(by='TRANSACTIONDATE', ascending=False)
-    # streamlit.table(df_transactions_f1[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
-    # df_transactions_f1.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_1'}, inplace=True)
-
-  with c2:
-    # filt_c2 = (df_transactions['TRANSACTIONYEAR'] == t_sel[1])
-    # df_transactions_f2 = df_transactions[filt_c2].sort_values(by='TRANSACTIONDATE', ascending=False)
-    # streamlit.table(df_transactions_f2[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
-    # df_transactions_f2.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_2'}, inplace=True)
- 
-  # t_year1 = 'Year_' + str(t_sel[0])
-  # t_year2 = 'Year_' + str(t_sel[1])
- 
-  # df_combined_trans = df_transactions_f1.merge(df_transactions_f2, how="inner", on='TRANSACTIONMONTH')
-  # df_combined_trans.rename(columns={'transactionAmount_1': t_year1, 'transactionAmount_2': t_year2}, inplace=True)
-  # df_combined_trans = pd.DataFrame()
-  # df_combined_trans['TRANSACTIONMONTH'] = df_transactions_f1['TRANSACTIONMONTH']
-  # df_combined_trans['TRANSACTIONMONTH'] = df_transactions_f2['TRANSACTIONMONTH']
-  # df_combined_trans['transactionAmount_1'] = df_transactions_f1['transactionAmount']
-  # df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
-  # streamlit.title("Merged DataFrame of the selected years:")
-  # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
-  # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
   streamlit.line_chart(df_months_represented[filt_slider], x= 'TRANSACTIONMONTH', y = 'TRANSACTIONYEAR')
   # streamlit.write(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))

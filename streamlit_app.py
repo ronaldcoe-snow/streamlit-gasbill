@@ -102,7 +102,7 @@ t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']]
 
 # streamlit.write(t_years)
 
-sel_year = int(df_sl_years['TRANSACTIONYEAR'].min())
+sel_year = [int(df_sl_years['TRANSACTIONYEAR'].min())]
 
 streamlit.slider("Select a year", min_value = int(df_sl_years['TRANSACTIONYEAR'].min()), max_value = int(df_sl_years['TRANSACTIONYEAR'].max()), value = int(df_sl_years['TRANSACTIONYEAR'].min()))
 # df_sl_years

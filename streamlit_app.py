@@ -101,7 +101,7 @@ t_years = df_sl_years_0['TRANSACTIONYEAR'].values.tolist()
 
 # streamlit.write(t_years)
 
-st.slider(df_sl_years['transactionYear'])
+streamlit.slider(df_sl_years['transactionYear'])
 streamlit.title("Compare expenses associated between two years of natural gas bills:")
 t_sel = streamlit.multiselect("What Years to compare?", df_sl_years, max_selections=2)
 

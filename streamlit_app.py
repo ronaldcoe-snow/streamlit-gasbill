@@ -43,12 +43,6 @@ def get_demo_transaction_list_w_param_year(the_year):
 # my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_session = create_sp_session()
 
-# back_from_function = get_demo_table_list()
-# my_cnx.close()
-
-# df = pd.DataFrame(back_from_function, columns=['First', 'Last', 'Age'])
-# streamlit.dataframe(df)
-
 
 # streamlit.table(df)
 r_df = pd.DataFrame()
@@ -77,41 +71,16 @@ filt_y = (df_transactions['TRANSACTIONYEAR'].isin(df_y_rep['TRANSACTIONYEAR'].va
 
 df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['TRANSACTIONDATE', 'TRANSACTIONAMOUNT', 'TRANSACTIONSTATUS', 'TRANSACTIONYEAR', 'TRANSACTIONMONTH'])
 
-# streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONMONTH'))
 
-# streamlit.table(df_months_represented.drop_duplicates(subset='TRANSACTIONYEAR'))
 
 df_sl_years = pd.DataFrame(df_months_represented)
-# df_sl_years_0 = df_sl_years.to_frame().reset_index()
-# df_sl_years_0 = df_sl_years_0.rename(columns={0: 'TRANSACTIONYEAR'})
-# df_sl_years.set_index(['TRANSACTIONYEAR'], inplace=True)
 
-# streamlit.table(df_sl_years)
 
 t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']]
-# t_years = (2015, 2016)
 
-# streamlit.write(t_years)
-
-# my_option = streamlit.selectbox("The Year: ", df_sl_years)
-
-# filt_one = (df_transactions['TRANSACTIONYEAR'] == my_option)
-# streamlit.table(df_transactions[filt_one])
-
-# streamlit.write(t_years)
-
-# streamlit.write(t_years)
-
-# sel_year = [int(df_sl_years['TRANSACTIONYEAR'].min())]
 
 sel_year = streamlit.slider("Select a year", min_value = int(df_sl_years['TRANSACTIONYEAR'].min()), max_value = int(df_sl_years['TRANSACTIONYEAR'].max()), value = int(df_sl_years['TRANSACTIONYEAR'].min()))
-# df_sl_years
-# streamlit.title("Compare expenses associated between two years of natural gas bills:")
-# t_sel = streamlit.multiselect("What Years to compare?", df_sl_years['TRANSACTIONYEAR'], max_selections=2)
 
-# streamlit.write(t_sel)
-
-# streamlit.write(len(t_sel))
 
 filt_slider = ((df_transactions['TRANSACTIONYEAR'] >= int(df_sl_years['TRANSACTIONYEAR'].min()) & (df_transactions['TRANSACTIONYEAR'] <= sel_year)))
 

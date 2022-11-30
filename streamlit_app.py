@@ -124,15 +124,15 @@ if sel_year > 0:
   # c2.subheader("Year Two: " + str(t_sel[1]))
   with c1:
     # filt_c1 = (df_transactions['TRANSACTIONYEAR'] == t_sel[0])
-    df_transactions_f1 = df_transactions[filt_c1].sort_values(by='TRANSACTIONDATE', ascending=False)
+    # df_transactions_f1 = df_transactions[filt_c1].sort_values(by='TRANSACTIONDATE', ascending=False)
     # streamlit.table(df_transactions_f1[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
-    df_transactions_f1.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_1'}, inplace=True)
+    # df_transactions_f1.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_1'}, inplace=True)
 
   with c2:
     # filt_c2 = (df_transactions['TRANSACTIONYEAR'] == t_sel[1])
-    df_transactions_f2 = df_transactions[filt_c2].sort_values(by='TRANSACTIONDATE', ascending=False)
+    # df_transactions_f2 = df_transactions[filt_c2].sort_values(by='TRANSACTIONDATE', ascending=False)
     # streamlit.table(df_transactions_f2[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
-    df_transactions_f2.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_2'}, inplace=True)
+    # df_transactions_f2.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_2'}, inplace=True)
  
   # t_year1 = 'Year_' + str(t_sel[0])
   # t_year2 = 'Year_' + str(t_sel[1])

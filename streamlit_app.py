@@ -123,13 +123,13 @@ if len(t_sel) == 2:
   with c1:
     filt_c1 = (df_transactions['TRANSACTIONYEAR'] == t_sel[0])
     df_transactions_f1 = df_transactions[filt_c1].sort_values(by='TRANSACTIONDATE', ascending=False)
-    streamlit.table(df_transactions_f1[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
+    # streamlit.table(df_transactions_f1[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
     df_transactions_f1.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_1'}, inplace=True)
 
   with c2:
     filt_c2 = (df_transactions['TRANSACTIONYEAR'] == t_sel[1])
     df_transactions_f2 = df_transactions[filt_c2].sort_values(by='TRANSACTIONDATE', ascending=False)
-    streamlit.table(df_transactions_f2[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
+    # streamlit.table(df_transactions_f2[['cv_TRANSACTIONDATE', 'TRANSACTIONAMOUNT']])
     df_transactions_f2.rename(columns={'TRANSACTIONAMOUNT': 'transactionAmount_2'}, inplace=True)
  
   t_year1 = 'Year_' + str(t_sel[0])
@@ -142,9 +142,9 @@ if len(t_sel) == 2:
   # df_combined_trans['TRANSACTIONMONTH'] = df_transactions_f2['TRANSACTIONMONTH']
   # df_combined_trans['transactionAmount_1'] = df_transactions_f1['transactionAmount']
   # df_combined_trans['transactionAmount_2'] = df_transactions_f2['transactionAmount']
-  streamlit.title("Merged DataFrame of the selected years:")
+  # streamlit.title("Merged DataFrame of the selected years:")
   # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
-  streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
+  # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
   streamlit.line_chart(df_combined_trans, x= 'TRANSACTIONMONTH', y = sel_year)
-  streamlit.write(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
+  # streamlit.write(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))

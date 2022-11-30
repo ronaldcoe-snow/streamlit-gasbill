@@ -88,7 +88,7 @@ df_sl_years = pd.DataFrame(df_months_represented)
 
 streamlit.table(df_sl_years)
 
-t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']].drop_duplicates()
+t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']]
 # t_years = (2015, 2016)
 
 # streamlit.write(t_years)

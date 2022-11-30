@@ -84,7 +84,7 @@ df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['TRANSACT
 df_sl_years = df_months_represented['TRANSACTIONYEAR'].drop_duplicates()
 df_sl_years_0 = df_sl_years.to_frame().reset_index()
 df_sl_years_0 = df_sl_years_0.rename(columns={0: 'TRANSACTIONYEAR'})
-df_sl_years.set_index(['TRANSACTIONYEAR'], inplace=True)
+# df_sl_years.set_index(['TRANSACTIONYEAR'], inplace=True)
 
 # streamlit.table(df_sl_years_0)
 
@@ -101,7 +101,7 @@ t_years = df_sl_years_0['TRANSACTIONYEAR'].values.tolist()
 
 # streamlit.write(t_years)
 
-streamlit.slider("Select a year", value = (df_sl_years['TRANSACTIONYEAR']))
+streamlit.slider("Select a year", value = (t_years))
 # df_sl_years
 streamlit.title("Compare expenses associated between two years of natural gas bills:")
 t_sel = streamlit.multiselect("What Years to compare?", df_sl_years, max_selections=2)

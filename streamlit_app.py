@@ -105,7 +105,7 @@ t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']]
 streamlit.slider("Select a year", min_value = int(df_sl_years['TRANSACTIONYEAR'].min()), max_value = int(df_sl_years['TRANSACTIONYEAR'].max()), value = int(df_sl_years['TRANSACTIONYEAR'].min()))
 # df_sl_years
 streamlit.title("Compare expenses associated between two years of natural gas bills:")
-t_sel = streamlit.multiselect("What Years to compare?", df_sl_years, max_selections=2)
+t_sel = streamlit.multiselect("What Years to compare?", df_sl_years['TRANSACTIONYEAR'], max_selections=2)
 
 # streamlit.write(t_sel)
 

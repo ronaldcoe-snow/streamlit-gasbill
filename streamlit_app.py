@@ -146,5 +146,5 @@ if len(t_sel) == 2:
   # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))
   # streamlit.table(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]])
 
-  streamlit.line_chart(df_combined_trans, x= 'TRANSACTIONMONTH', y = sel_year)
+  streamlit.line_chart(df_months_represented, x= 'TRANSACTIONMONTH', y = 'TRANSACTIONYEAR')
   # streamlit.write(df_combined_trans[['TRANSACTIONMONTH', 'Year_' + str(t_sel[0]), 'Year_' + str(t_sel[1])]].to_string(index=False))

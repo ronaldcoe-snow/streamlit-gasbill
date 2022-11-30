@@ -86,9 +86,9 @@ df_sl_years_0 = df_sl_years.to_frame().reset_index()
 df_sl_years_0 = df_sl_years_0.rename(columns={0: 'TRANSACTIONYEAR'})
 # df_sl_years.set_index(['TRANSACTIONYEAR'], inplace=True)
 
-# streamlit.table(df_sl_years_0)
+streamlit.table(df_sl_years)
 
-t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR'].values]
+# t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR'].values]
 
 # streamlit.write(t_years)
 

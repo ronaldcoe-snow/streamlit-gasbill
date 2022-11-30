@@ -117,7 +117,7 @@ filt_slider = ((df_transactions['TRANSACTIONYEAR'] >= int(df_sl_years['TRANSACTI
 
 f_date_str = "%Y-%m-%d"
 df_transactions['cv_TRANSACTIONDATE'] = df_transactions['TRANSACTIONDATE'].dt.strftime(f_date_str)
-if len(t_sel) == 2:
+if sel_year > 0:
   c1, c2 = streamlit.columns(2)
 
   c1.subheader("Year One: " + str(t_sel[0]))

@@ -86,7 +86,7 @@ df_sl_years = pd.DataFrame(df_months_represented)
 # df_sl_years_0 = df_sl_years_0.rename(columns={0: 'TRANSACTIONYEAR'})
 # df_sl_years.set_index(['TRANSACTIONYEAR'], inplace=True)
 
-streamlit.table(df_sl_years)
+# streamlit.table(df_sl_years)
 
 t_years = [int(x) for x in df_sl_years['TRANSACTIONYEAR']]
 # t_years = (2015, 2016)

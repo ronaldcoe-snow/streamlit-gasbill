@@ -84,7 +84,7 @@ df_months_represented = pd.DataFrame(df_transactions[filt_m], columns=['TRANSACT
 df_sl_years = df_months_represented['TRANSACTIONYEAR'].drop_duplicates()
 df_sl_years_0 = df_sl_years.to_frame().reset_index()
 df_sl_years_0 = df_sl_years_0.rename(columns={0: 'TRANSACTIONYEAR'})
-# df_sl_years_0.set_index(['TRANSACTIONYEAR'], inplace=True)
+df_sl_years.set_index(['TRANSACTIONYEAR'], inplace=True)
 
 # streamlit.table(df_sl_years_0)
 
